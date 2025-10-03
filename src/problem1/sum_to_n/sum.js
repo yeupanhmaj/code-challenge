@@ -13,14 +13,8 @@ const sum_to_n_b = function(n) {
 };
 
 const sum_to_n_c = function(n) {
-    // Recursive approach
-    if (n <= 0) {
-        return 0;
-    }
-    if (n === 1) {
-        return 1;
-    }
-    return n + sum_to_n_c(n - 1);
+    // Using Array and Reduce
+    return Array.from({ length: n }, (_, i) => i + 1).reduce((acc, curr) => acc + curr, 0);
 };
 
 // Benchmark function to test performance and correctness
@@ -65,9 +59,9 @@ function benchmark() {
             const startC = performance.now();
             const resultC = sum_to_n_c(n);
             const endC = performance.now();
-            console.log(`  Method C (Recursive): ${(endC - startC).toFixed(4)}ms | Result: ${resultC}`);
+            console.log(`  Method C (Using Array and Reduce): ${(endC - startC).toFixed(4)}ms | Result: ${resultC}`);
         } else {
-            console.log(`  Method C (Recursive): Skipped (risk of stack overflow)`);
+            console.log(`  Method C (Using Array and Reduce): Skipped (risk of stack overflow)`);
         }
     });
     
@@ -99,7 +93,7 @@ function benchmark() {
         sum_to_n_c(testN);
     }
     const endIterC = performance.now();
-    console.log(`  Method C (Recursive): ${(endIterC - startIterC).toFixed(4)}ms total, ${((endIterC - startIterC) / iterations).toFixed(6)}ms avg`);
+    console.log(`  Method C (Using Array and Reduce): ${(endIterC - startIterC).toFixed(4)}ms total, ${((endIterC - startIterC) / iterations).toFixed(6)}ms avg`);
     
     console.log('\n=== Benchmark Complete ===');
 }
